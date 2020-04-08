@@ -1,0 +1,217 @@
+\documentclass[14pt, titlepage, fleqn]{extarticle}
+\usepackage[russian]{babel}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\title{Отчет к Лабораторной работе №1}
+\author{Брызгалов Александр Витальевич\\Б8118-02.03.01сцт}
+\date{3 Апреля 2020}
+
+\begin{document}
+	
+	\maketitle
+	
+	\tableofcontents
+	\addcontentsline{toc}{subsection}{Содержание}		
+	
+	\newpage
+	\subsection*{Описать решение интеграла}
+	\addcontentsline{toc}{subsection}{Описать решение интеграла}		
+
+	1. Вычислить следующий интеграл с подробным описанием всех действий:
+	$$ \int \frac{\ln x^2}{x^2} ~ dx$$
+	
+	\begin{equation*}
+		\begin{aligned}
+			\int \frac{\ln x^2}{x^2} ~ dx &= (*) \left \vert
+				\begin{matrix}
+					u = \ln x^2 & du = \frac{2}{x}~dx\\
+					dv = \frac{1}{x^2} ~ dx  & v = -\frac{1}{x}
+				\end{matrix}
+			\right \vert (*) = -\frac{\ln x^2}{x} + \int \frac{dx}{x^2} = \\ 
+			&= -\frac{\ln x^2 + 2}{x} + C
+		\end{aligned}
+	\end{equation*}
+
+	\newpage
+	\subsection*{Численное решение}
+
+	2. Численно вычислить следующий интеграл с точностью $\epsilon = 10^{-3}$:
+
+	$$\int\limits_1^\infty  \frac{{\rm e}^{-x}}{x} ~ dx$$
+
+	\addcontentsline{toc}{subsection}{Численное решение}
+	\subsection*{Метод левых прямоугольников}
+	\begin{lstlisting}[language=C++, basicstyle=\footnotesize\ttfamily, frame = single]
+
+double f(double x);
+bool checkEnd(double F);
+
+int main() {
+	double answer = 0, 
+	x = 1, 
+	dx = 0.000001;
+	bool counting = true;
+	while(counting) {		
+		double F = f(x);
+		answer += F * dx;
+		x += dx;
+		counting = checkEnd(F);		
+	}
+	cout << answer;
+}
+
+double f(double x) { return exp(-x) / x; }
+
+bool checkEnd(double F) {
+	if (abs(F) < 0.0000000001) return false;
+	else return true;
+}
+	
+	\end{lstlisting}
+		
+
+	\newpage
+	\subsection*{Метод правых прямоугольников}
+	\begin{lstlisting}[language=C++, basicstyle=\footnotesize\ttfamily, frame = single]
+
+double f(double x);
+bool checkEnd(double F);
+
+int main() {
+	double answer = 0, 
+	x = 1, 
+	dx = 0.000001;
+	bool counting = true;
+	while(counting) {		
+		double F = f(x + dx);
+		answer += F * dx;
+		x += dx;
+		counting = checkEnd(F);		
+	}
+	cout << answer;
+}
+
+double f(double x) { return exp(-x) / x; }
+
+bool checkEnd(double F) {
+	if (abs(F) < 0.0000000001) return false;
+	else return true;
+}
+
+	\end{lstlisting}
+
+	\newpage
+	\subsection*{Метод средних прямоугольников}
+	\begin{lstlisting}[language=C++, basicstyle=\footnotesize\ttfamily, frame = single]
+
+double f(double x);
+bool checkEnd(double F);
+
+int main() {
+	double answer = 0, 
+	x = 1, 
+	dx = 0.000001;
+	bool counting = true;
+	while(counting) {		
+		double F = f((x + dx + x) / 2);
+		answer += F * dx;
+		x += dx;
+		counting = checkEnd(F);		
+	}
+	cout << answer;
+}
+
+double f(double x) { return exp(-x) / x; }
+
+bool checkEnd(double F) {
+	if (abs(F) < 0.0000000001) return false;
+	else return true;
+}
+
+	\end{lstlisting}
+
+	\newpage
+	\subsection*{Метод трапеции}
+	\begin{lstlisting}[language=C++, basicstyle=\footnotesize\ttfamily, frame = single]
+
+double f(double x);
+bool checkEnd(double F);
+
+int main() {
+	double answer = 0, 
+	x = 1, 
+	dx = 0.000001;
+	bool counting = true;
+	while(counting) {		
+		double F = (f(x) + f(x + dx)) / 2;
+		answer += F * dx;
+		x += dx;
+		counting = checkEnd(F);		
+	}
+	cout << answer;
+}
+
+double f(double x) { return exp(-x) / x; }
+
+bool checkEnd(double F) {
+	if (abs(F) < 0.0000000001) return false;
+	else return true;
+}
+
+	\end{lstlisting}
+\newpage
+1. Метод левых прямоугольников:  0.219384, ~ $\delta$ = 0.119732\\
+
+2. Метод правых прямоугольников: 0.219384, ~ $\delta$ = 0.119732\\
+
+3. Метод средних прямоугольников: 0.219384, ~ $\delta$ 0.119732\\
+
+4. Метод трапеции: 0.219384, ~ $\delta$ = 0.119732\\
+
+5. Реальное решение: 0.219384
+
+\newpage
+	\subsection*{Тип дифференциальных уравнений и их общее решение}
+	\addcontentsline{toc}{subsection}{Тип дифференциальных уравнений и их общее решение}
+
+	$${\rm e}^{x} \cdot \sin^{3}{y} = y'\cdot \sin{x}$$ 
+	Тип уравнения:\\	
+	Ответ: 
+	\begin{equation}
+	\end{equation}
+
+	$$xy' \cdot \tg{y} = 2 - x^2 \cdot \ln(x^2 \cdot \cos{y})$$
+	Тип уравнения:\\
+	Ответ:
+	\begin{equation}
+	\end{equation}
+
+	$$y' = \frac{2x + 3y - 5}{5 - 3x - 2y}$$ 
+	Тип уравнения:\\
+	Ответ:
+	\begin{equation}
+	\end{equation}
+	
+	$$y' \cdot \tg{x} - y = x \cdot \ cos{x}$$ 
+	Тип уравнения:\\
+	Ответ:
+	\begin{equation}
+	\end{equation}
+
+	\newpage
+	\subsection*{Проверка решения задачи Коши}
+	\addcontentsline{toc}{subsection}{Проверка решения задачи Коши}
+		$$xy' \cdot (e^{y} - x), ~~~y(0) = \ln{2}; ~~~xy = e^y-2$$
+		
+
+\end{document}
+
+
+
+
+
+
+
+

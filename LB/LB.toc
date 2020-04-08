@@ -1,0 +1,6 @@
+\babel@toc {russian}{}
+\contentsline {subsection}{Содержание}{1}%
+\contentsline {subsection}{Описать решение интеграла}{2}%
+\contentsline {subsection}{Численное решение}{3}%
+\contentsline {subsection}{Тип дифференциальных уравнений и их общее решение}{8}%
+\contentsline {subsection}{Проверка решения задачи Коши}{9}%
